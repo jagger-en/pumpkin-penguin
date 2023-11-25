@@ -1,22 +1,33 @@
 from email.mime.text import MIMEText 
-from email.mime.image import MIMEImage 
-from email.mime.application import MIMEApplication 
 from email.mime.multipart import MIMEMultipart 
 import smtplib 
-import os
 
-smtp = smtplib.SMTP('smtp.gmail.com', 587) 
-smtp.ehlo() 
-smtp.starttls() 
-# smtp.login('YourMail@gmail.com', 'Your Password')
-# password is not login password, is smtp password
-smtp.login('zhengtonglin211@gmail.com','djafzpxctuhuxhnc')
+subject = 'Reminder'
+body = """
+<html>
+<head>
+</head>
+<body>
+    <p>Dear Patient,</p>
+    <p><strong style="color: red;">Tomorrow is your scheduled treatment day, please make sure to attend.</strong></p>
+    <p>We look forward to seeing you to continue your treatment process.</p>
+    <p>If you have any questions or need further information, please feel free to contact us.</p>
+</body>
+</html>
+"""
 
-msg = MIMEMultipart() 
-msg['Subject'] = 'Reminder'
-msg.attach(MIMEText('Dear patient_name, Your treatment is tomorrow. Best, XXX'))
+def send_email(subject, body, target_email):
+    sender = 'notification.pumpkin.penguin@gmail.com'
+    password = 'xamxmmdkjjsefzrb'
+    smtp = smtplib.SMTP('smtp.gmail.com', 587) 
+    smtp.starttls() 
+    smtp.login(sender,password)
 
-to = ["1093840892@qq.com.com", "ucabtt1@ucl.ac.uk"] 
-smtp.sendmail(from_addr="zhengtonglin211@gmail.com", 
-			to_addrs=to, msg=msg.as_string()) 
-smtp.quit()
+    msg = MIMEMultipart() 
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body,'html'))
+
+    smtp.sendmail(from_addr=sender, 
+				to_addrs= target_email, msg=msg.as_string()) 
+    smtp.quit()
+    
