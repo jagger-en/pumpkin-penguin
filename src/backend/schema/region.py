@@ -6,3 +6,4 @@ ma = Marshmallow()
 class RegionSchema(ma.Schema):
     id = ma.Str()
     name = ma.Str()
+    avg_frac = ma.Float()

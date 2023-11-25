@@ -8,4 +8,4 @@ class Region(db.Model):
                    default=lambda: str(uuid.uuid4()))
     name = sa.Column(sa.String(150), nullable=False)
     machine_and_regions = db.relationship('MachineAndRegion', backref='region')
-    avgFrac = sa.Column(sa.Float, nullable=False)
+    avg_frac = sa.Column(sa.Float, nullable=False)
