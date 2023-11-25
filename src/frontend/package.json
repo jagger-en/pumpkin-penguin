@@ -8,9 +8,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "bootstrap": "^5.3.2",
     "bootstrap-vue": "^2.23.1",
-    "vue": "^3.3.9"
+    "popper.js": "^1.16.1",
+    "vue": "^3.3.9",
+    "vue-cal": "^4.8.1"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^4.4.0",
