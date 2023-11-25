@@ -125,56 +125,71 @@ export default {
     <div class="row align-items-start">
       <div class="patient-rack col">
         <!-- WIP: add patient -->
-        <!-- Button trigger modal -->
-        <button
-          type="button"
-          class="btn btn-primary"
-          data-bs-toggle="modal"
-          data-bs-target="#staticBackdrop"
-        >
-          Add patient
-        </button>
+        <div>
+          <button
+            type="button"
+            class="btn btn-primary"
+            data-bs-toggle="modal"
+            data-bs-target="#exampleModal"
+          >
+            Add patient
+          </button>
 
-        <!-- Modal -->
-        <div
-          class="modal-dialog modal-dialog-centered fade"
-          id="staticBackdrop"
-          data-bs-backdrop="static"
-          data-bs-keyboard="false"
-          tabindex="-1"
-          aria-labelledby="staticBackdropLabel"
-          aria-hidden="true"
-        >
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="staticBackdropLabel">
-                  Modal title
-                </h5>
-                <button
-                  type="button"
-                  class="btn-close"
-                  data-bs-dismiss="modal"
-                  aria-label="Close"
-                ></button>
-              </div>
-              <div class="modal-body">...</div>
-              <div class="modal-footer">
-                <button
-                  type="button"
-                  class="btn btn-secondary"
-                  data-bs-dismiss="modal"
-                >
-                  Close
-                </button>
-                <button type="button" class="btn btn-primary">
-                  Understood
-                </button>
+          <div
+            class="modal fade"
+            id="exampleModal"
+            tabindex="-1"
+            aria-labelledby="exampleModalLabel"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">
+                    New message
+                  </h5>
+                  <button
+                    type="button"
+                    class="btn-close"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"
+                  ></button>
+                </div>
+                <div class="modal-body">
+                  <form>
+                    <div class="mb-3">
+                      <label class="col-form-label">First name:</label>
+                      <input type="text" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                      <label class="col-form-label">Last name:</label>
+                      <input type="text" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                      <label class="col-form-label">Duration:</label>
+                      <input type="text" class="form-control" />
+                    </div>
+                    <div class="mb-3">
+                      <label class="col-form-label">Organ:</label>
+                      <input type="text" class="form-control" />
+                    </div>
+                  </form>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-bs-dismiss="modal"
+                  >
+                    Close
+                  </button>
+                  <button type="button" class="btn btn-primary">Submit</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
+        <br />
         <!-- WIP: patient card list -->
         <!-- Three HTML5 draggable events. -->
 
@@ -190,6 +205,10 @@ export default {
           ({{ item.duration ? `${item.duration} min` : "no duration" }})
           <div>{{ item.content }}</div>
         </div>
+        <br />
+        <button type="button" class="btn btn-primary">
+          Assign automatically
+        </button>
       </div>
 
       <div class="calendar col-10">
@@ -335,8 +354,8 @@ export default {
 }
 .container {
   max-width: 100% !important;
-  margin-right: 2% !important;
-  margin-left: 2% !important;
+  margin-right: 1% !important;
+  margin-left: 1% !important;
   margin-top: 20px;
 }
 
