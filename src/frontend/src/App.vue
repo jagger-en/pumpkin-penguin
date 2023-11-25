@@ -495,6 +495,12 @@ export default {
   background-color: #f2aa1a30 !important;
 }
 
+.vuecal__event {
+  box-shadow: 0px 2px 5px 0px #969696;
+  border: 1px solid #d4d4d4;
+  border-radius: 5px;
+}
+
 /* Different color for different event types. */
 /* .vuecal__event.leisure {background-color: rgba(253, 156, 66, 0.9);border: 1px solid rgb(233, 136, 46);color: #fff;} */
 /* .vuecal__event.health {background-color: rgba(164, 230, 210, 0.9);border: 1px solid rgb(144, 210, 190);} */
