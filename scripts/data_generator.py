@@ -10,7 +10,7 @@ def generate_fake_appointment_data():
     fake_data = []
 
     for idx in range(100):
-        start_date = fake.date_between_dates(date_start=datetime(2023, 11, 25), date_end=datetime(2023, 12, 25))
+        start_date = fake.date_between_dates(date_start=datetime(2023, 11, 20), date_end=datetime(2023, 12, 25))
         start_time = fake.time_object(end_datetime=datetime.combine(start_date, datetime.max.time()))
 
         start_datetime = datetime.combine(start_date, start_time).replace(tzinfo=pytz.UTC)

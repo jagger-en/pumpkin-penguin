@@ -10,6 +10,7 @@ export default {
   data: () => ({
     stickySplitLabelsEnabled: true,
     minCellWidth: 0,
+    appointmentsFromDatabase: [],
     minSplitWidth: 0,
     splitDays: [
       // The id property is added automatically if none (starting from 1), but you can set a custom one.
@@ -18,35 +19,8 @@ export default {
       { id: 2, class: "tb2", label: "TB2", hide: false },
       { id: 3, class: "vb1", label: "VB1", hide: false },
       { id: 4, class: "vb2", label: "VB2", hide: false },
-      { id: 5, class: "u", label: "U", hide: false },
+      { id: 5, class: "u", label: "U1", hide: false },
     ],
-    events: [
-      {
-        start: "2023-11-27 10:35",
-        end: "2023-11-27 11:00",
-        title: "Occupied",
-        content: '<i class="icon material-icons">Lung</i>',
-        class: "occupied",
-        split: 1, // Has to match the id of the split you have set (or integers if none).
-      },
-      {
-        start: "2023-11-30 8:30",
-        end: "2023-11-30 9:00",
-        title: "Occupied",
-        content: '<i class="icon material-icons">Whole Brain</i>',
-        class: "occupied",
-        split: 2,
-      },
-      {
-        start: "2023-12-01 13:30",
-        end: "2023-12-01 13:45",
-        title: "Occupied",
-        content: '<i class="icon material-icons">Breast</i>',
-        class: "occupied",
-        split: 4,
-      },
-    ],
-
     draggables: [
       {
         // The id (or however you name it), will help you find which event to delete
@@ -70,7 +44,35 @@ export default {
       },
     ],
   }),
+  mounted() {
+    this.fetchEntriesFromDatabase()
+  },
   methods: {
+    determineSplit(machine_id) {
+      return this.splitDays.find(d => {
+        return machine_id == d.label
+      }).id
+    },
+    fetchEntriesFromDatabase() {
+        fetch(`http://127.0.0.1:8000/api/v1/appointment`).then((response) => {
+            response.json().then((data) => {
+                if (response.ok) {
+                    this.appointmentsFromDatabase = data.map(d => {
+                      console.log(d)
+                      return {
+                          start: d.start_time,
+                          end: d.end_time,
+                          title: d.machine.machine_name,
+                          content: `[${d.priority.name}] ${d.patient.first_name} ${d.patient.last_name}`,
+                          class: "health",
+                          split: this.determineSplit(d.machine.id), // Has to match the id of the split you have set (or integers if none).
+                        }
+                    })
+                    // this.appointmentsFromDatabase = data
+                }
+            })
+        })
+    },
     onEventChange(e) {
       console.log(`from ${e.event.start} to ${e.event.end}`)
     },
@@ -102,7 +104,7 @@ export default {
 /* const overTime = { from: 17 * 60, to: 20 * 60, class: 'overtime-hours' }; */
 /* // In your component's data, special hours from Monday to Friday. */
 /* // Note that you can provide an array of multiple blocks for the same day. */
-/* specialHours: { */
+/* : { */
 /*   1: overTime */
 /* }; */
 </script>
@@ -386,7 +388,7 @@ export default {
           :time-to="18 * 60"
           :time-step="15"
           :snap-to-time="15"
-          :events="events"
+          :events="appointmentsFromDatabase"
           :editable-events="{
             title: false,
             drag: true,
