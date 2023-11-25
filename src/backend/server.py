@@ -46,18 +46,24 @@ def _initialize_db(app):
 
 
 def _register_api_resources(app):
-    from backend.resources import PatientResource  # pylint: disable=import-error
+    from backend.resources import AppointmentResource  # pylint: disable=import-error
+    from backend.resources import GenderResource  # pylint: disable=import-error
     from backend.resources import MachineResource  # pylint: disable=import-error
-    from backend.resources import RegionResource  # pylint: disable=import-error
     from backend.resources import MachineAndRegionResource  # pylint: disable=import-error
+    from backend.resources import PatientResource  # pylint: disable=import-error
+    from backend.resources import PriorityResource  # pylint: disable=import-error
+    from backend.resources import RegionResource  # pylint: disable=import-error
 
     api = Api(app)
 
     list_of_resources = [
-        PatientResource,
+        AppointmentResource,
+        GenderResource,
         MachineResource,
-        RegionResource,
         MachineAndRegionResource,
+        PatientResource,
+        PriorityResource,
+        RegionResource,
     ]
 
     list_of_resource_and_endpoints = [

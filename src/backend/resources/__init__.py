@@ -1,5 +1,7 @@
-from .patient import PatientResource
+from .appointment import AppointmentResource
+from .gender import GenderResource
 from .machine import MachineResource
-from .region import RegionResource
 from .machineAndRegion import MachineAndRegionResource
-
+from .patient import PatientResource
+from .priority import PriorityResource
+from .region import RegionResource
