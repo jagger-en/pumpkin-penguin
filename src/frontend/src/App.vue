@@ -201,10 +201,20 @@ export default {
           draggable="true"
           @dragstart="onEventDragStart($event, item)"
         >
-          <strong>{{ item.title }}</strong>
-          ({{ item.duration ? `${item.duration} min` : "no duration" }})
-          <div>{{ item.content }}</div>
+          <div class="row">
+            <div class="col">
+              <strong>{{ item.title }}</strong>
+              ({{ item.duration ? `${item.duration} min` : "no duration" }})
+              <div>{{ item.content }}</div>
+            </div>
+            <div class="col">
+              <button type="button" class="btn btn-outline-primary">
+                Details
+              </button>
+            </div>
+          </div>
         </div>
+
         <br />
         <button type="button" class="btn btn-primary">
           Assign automatically
