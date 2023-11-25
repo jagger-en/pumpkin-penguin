@@ -1,0 +1,101 @@
+patient_id,organ,fraction,bed_id
+1,Crane,1,11
+2,Pelvis,23,46
+3,Lung,5,
+4,Breast Special,30,
+5,Lung,5,38
+6,Crane,25,
+7,Whole Brain,10,27
+8,Breast,30,
+9,Abdomen,1,6
+10,Abdomen,20,10
+11,Pelvis,23,
+12,Breast Special,25,
+13,Breast,25,45
+14,Lung,20,29
+15,Breast,15,28
+16,Crane,1,
+17,Breast,25,41
+18,Pelvis,5,
+19,Pelvis,25,
+20,Head & neck,33,3
+21,Breast,19,
+22,Pelvis,3,2
+23,Pelvis,23,50
+24,Breast,15,
+25,Lung,25,
+26,Breast,19,41
+27,Crane,5,10
+28,Crane,13,
+29,Abdomen,10,22
+30,Head & neck,33,32
+31,Head & neck,25,47
+32,Lung,20,
+33,Pelvis,28,9
+34,Abdomen,3,7
+35,Head & neck,10,
+36,Breast,25,
+37,Whole Brain,12,34
+38,Breast,30,27
+39,Lung special,8,
+40,Breast,30,2
+41,Whole Brain,12,35
+42,Whole Brain,10,
+43,Breast,25,12
+44,Breast,30,
+45,Whole Brain,10,
+46,Breast,15,3
+47,Pelvis,23,1
+48,Breast,30,4
+49,Breast,19,18
+50,Lung,10,
+51,Breast,19,11
+52,Breast Special,15,
+53,Crane,5,
+54,Pelvis,35,
+55,Whole Brain,10,42
+56,Lung special,5,
+57,Breast,30,30
+58,Crane,10,21
+59,Crane,10,43
+60,Breast,25,
+61,Breast Special,15,13
+62,Abdomen,5,17
+63,Pelvis,15,2
+64,Lung special,5,
+65,Lung,5,25
+66,Pelvis,10,36
+67,Head & neck,25,10
+68,Lung special,8,25
+69,Whole Brain,5,36
+70,Lung special,8,2
+71,Breast,30,
+72,Lung special,3,38
+73,Head & neck,5,
+74,Breast,30,38
+75,Abdomen,3,36
+76,Pelvis,10,2
+77,Lung special,8,5
+78,Breast,19,33
+79,Pelvis,22,47
+80,Abdomen,18,33
+81,Head & neck,5,28
+82,Pelvis,3,
+83,Lung,5,39
+84,Breast,30,
+85,Pelvis,23,
+86,Breast,15,
+87,Pelvis,5,
+88,Head & neck,5,
+89,Head & neck,30,
+90,Lung special,8,
+91,Breast Special,25,28
+92,Lung,30,
+93,Head & neck,5,
+94,Pelvis,15,40
+95,Pelvis,15,9
+96,Whole Brain,10,44
+97,Abdomen,1,8
+98,Breast,25,
+99,Whole Brain,10,3
+100,Breast,19,
