@@ -9,6 +9,6 @@ class PatientSchema(ma.Schema):
     last_name = ma.Str()
     email = ma.Str()
     gender = ma.Nested(GenderSchema)
-    date_of_birth = ma.Date()
+    date_of_birth = ma.Str()
     weight = ma.Float()
     height = ma.Float()
