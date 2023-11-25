@@ -25,6 +25,13 @@ class ApiResource(Resource):
 
         return self.dump_many(items)
 
+    def put(self):
+        request_json = request.json
+        self.MODEL.query.filter_by(id=request_json['id']).update(request_json)
+        db.session.commit()
+        return request_json, 201
+
+
     def post(self):
         request_json = request.json
         if type(request_json) == dict:

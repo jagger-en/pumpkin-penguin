@@ -18,6 +18,27 @@ class TestEndpoints(BaseClass):
         self.assertEqual([{'id': '1', 'name': 'male'}],
                          result.json)
 
+    def test_data_is_updated(self):
+        with self.flask_app.app_context():
+            from backend.models.gender import Gender
+            test_data = []
+            test_data.append(Gender(id=1, name='old-gender'))
+            self.db.session.add_all(test_data)
+            self.db.session.commit()
+
+        result = self.endpoint_client.get(self.RESOURCE_PATH)
+        self.assertEqual([{'id': '1', 'name': 'old-gender'}],
+                         result.json)
+
+
+        result = self.endpoint_client.put(self.RESOURCE_PATH, json={'id': '1', 'name': 'new-gender'})
+        self.assertEqual(result.status_code, 201)
+
+        result = self.endpoint_client.get(self.RESOURCE_PATH)
+        self.assertEqual([{'id': '1', 'name': 'new-gender'}],
+                         result.json)
+
+
     def test_deleting_resource(self):
         with self.flask_app.app_context():
             from backend.models.gender import Gender
