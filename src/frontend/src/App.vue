@@ -58,7 +58,6 @@ export default {
             response.json().then((data) => {
                 if (response.ok) {
                     this.appointmentsFromDatabase = data.map(d => {
-                      console.log(d)
                       return {
                           start: d.start_time,
                           end: d.end_time,
