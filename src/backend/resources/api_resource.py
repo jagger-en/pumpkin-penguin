@@ -1,7 +1,7 @@
 from flask_restful import Resource, request
 from backend.utils.query import query_wrapper
 from backend.utils.query import commit_wrapper
-
+from backend.models.database import db
 
 class ApiResource(Resource):
 
@@ -30,6 +30,17 @@ class ApiResource(Resource):
         if type(request_json) == dict:
             return self.handle_single_entry(request_json)
         return "Failed to parse payload", 400
+
+    def delete(self):
+        form_data = dict(request.args)
+        if form_data.get('id'):
+            item = self.MODEL.query.get(form_data.get('id'))
+            if item:
+                db.session.delete(item)
+                db.session.commit()
+                return self.dump_one(item)
+            return self.NOT_FOUND % form_data.get('id'), 404
+        return "Resource id must be given", 400
 
     def handle_single_entry(self, payload):
         payload, err = self.extract_payload(payload)
