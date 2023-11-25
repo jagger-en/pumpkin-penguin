@@ -71,6 +71,9 @@ export default {
     ],
   }),
   methods: {
+    onEventChange(e) {
+      console.log(`from ${e.event.start} to ${e.event.end}`)
+    },
     onEventDragStart(e, draggable) {
       // Passing the event's data to Vue Cal through the DataTransfer object.
       e.dataTransfer.setData("event", JSON.stringify(draggable));
@@ -395,6 +398,7 @@ export default {
           :split-days="splitDays"
           @ready="scrollToCurrentTime"
           selected-date="2023-11-27"
+          @event-change="onEventChange"
         >
         </vue-cal>
       </div>
