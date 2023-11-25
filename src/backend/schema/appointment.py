@@ -13,5 +13,5 @@ class AppointmentSchema(ma.Schema):
     patient = ma.Nested(PatientSchema)
     priority = ma.Nested(PrioritySchema)
 
-    start_time = ma.DateTime()
-    end_time = ma.DateTime()
+    start_time = ma.Str()
+    end_time = ma.Str()

@@ -10,5 +10,5 @@ class Appointment(db.Model):
     patient_id = db.Column(db.String(36), db.ForeignKey('patient.id'), nullable=False)
     priority_id = db.Column(db.String(36), db.ForeignKey('priority.id'), nullable=False)
 
-    start_time = sa.Column(sa.DateTime, nullable=False)
-    end_time = sa.Column(sa.DateTime, nullable=False)
+    start_time = sa.Column(sa.String(150), nullable=False)
+    end_time = sa.Column(sa.String(150), nullable=False)

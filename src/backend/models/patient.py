@@ -13,3 +13,4 @@ class Patient(db.Model):
     date_of_birth = sa.Column(sa.String(150), nullable=False)
     weight = sa.Column(sa.Float, nullable=False)
     height = sa.Column(sa.Float, nullable=False)
+    appointments = db.relationship('Appointment', backref='patient')

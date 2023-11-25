@@ -3,6 +3,23 @@
 import json
 import requests
 
+
+
+for priority in [{'id': 'A', 'name': 'A', 'description': 'High priority.'}, {'id': 'B', 'name': 'B', 'description': 'Low priority'}]:
+    payload = json.dumps(priority, ensure_ascii=False)
+    response = requests.post(
+        "http://127.0.0.1:8000/api/v1/priority",
+        headers={"Content-type": "application/json"},
+        data=payload
+    )
+    if response.status_code != 201:
+        raise Exception('Failed to send request: [%s] %s' % (response.status_code, response.json()))
+    print(response.json())
+
+
+
+
+
 def add_machines_to_db(machines):
     for machine in machines:
         payload = json.dumps(machine, ensure_ascii=False)
@@ -947,5 +964,15 @@ add_patients_to_db(cleaned_patients)
 
 
 
+from data_generator import generate_fake_appointment_data
 
-
+for appointment in generate_fake_appointment_data():
+    payload = json.dumps(appointment, ensure_ascii=False)
+    response = requests.post(
+        "http://127.0.0.1:8000/api/v1/appointment",
+        headers={"Content-type": "application/json"},
+        data=payload
+    )
+    if response.status_code != 201:
+        raise Exception('Failed to send request: [%s] %s' % (response.status_code, response.json()))
+    print(response.json())
