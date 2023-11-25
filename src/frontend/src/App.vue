@@ -2,13 +2,13 @@
 import VueCal from "vue-cal";
 import "vue-cal/dist/vuecal.css";
 import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "bootstrap/dist/js/bootstrap.bundle.min.js";
 </script>
 
 <script>
 export default {
   data: () => ({
+    stickySplitLabelsEnabled: true,
     minCellWidth: 400,
     minSplitWidth: 0,
     splitDays: [
@@ -94,6 +94,15 @@ export default {
     },
   },
 };
+
+/* // Special hours */
+/* const overTime = { from: 17 * 60, to: 20 * 60, class: 'overtime-hours' }; */
+/* // In your component's data, special hours from Monday to Friday. */
+/* // Note that you can provide an array of multiple blocks for the same day. */
+/* specialHours: { */
+/*   1: overTime */
+/* }; */
+
 </script>
 
 <template>
@@ -116,7 +125,7 @@ export default {
         <div
           style="display: flex; align-items: center; justify-content: center"
         >
-          <h2>Schedule</h2>
+          <h2>A near-smart scheduler</h2>
         </div>
       </div>
     </div>
@@ -233,7 +242,7 @@ export default {
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title" id="staticBackdropLabel">
-                        Modal title
+                        Time-slot details
                       </h5>
                       <button
                         type="button"
@@ -242,7 +251,10 @@ export default {
                         aria-label="Close"
                       ></button>
                     </div>
-                    <div class="modal-body">Patient Info</div>
+                    <div class="modal-body">
+                      <p>Patient Info</p>
+                      <p>Treatment Info</p>
+                    </div>
                     <div class="modal-footer">
                       <button
                         type="button"
@@ -273,11 +285,10 @@ export default {
             type="checkbox"
             value=""
             id="flexCheckChecked"
-            checked
             @click="minCellWidth = minCellWidth ? 0 : 400"
           />
           <label class="form-check-label" for="flexCheckChecked">
-            Min cell width: 400px
+            Expand day column
           </label>
         </div>
 
@@ -287,11 +298,10 @@ export default {
             type="checkbox"
             value=""
             id="flexCheckChecked"
-            checked
             @click="minSplitWidth = minSplitWidth ? 0 : 200"
           />
           <label class="form-check-label" for="flexCheckChecked">
-            Min split width: 200px
+            Expand machine column
           </label>
         </div>
         <!-- For loop for splitDays[i] -->
@@ -367,18 +377,20 @@ export default {
 
         <vue-cal
           style="padding: 2.5vh; height: 98vh"
-          :disable-views="['years', 'year']"
           hide-weekends
+          :disable-views="['years', 'year']"
+          :min-cell-width="minCellWidth"
+          :min-split-width="minSplitWidth"
+          :sticky-split-labels="stickySplitLabelsEnabled"
           :time-from="8 * 60"
           :time-to="18 * 60"
           :time-step="30"
           :snap-to-time="15"
-          editable-events
-          @event-drop="onEventDrop"
+          :special-hours="specialHours"
           :events="events"
+          :editable-events="{ title: false, drag: true, resize: false, delete: true, create: false }"
+          @event-drop="onEventDrop"
           :split-days="splitDays"
-          :min-cell-width="minCellWidth"
-          :min-split-width="minSplitWidth"
           @ready="scrollToCurrentTime"
         >
         </vue-cal>
@@ -394,12 +406,13 @@ export default {
   justify-content: center;
 }
 
-.col h1 {
+.col h2 {
   font-family: "Arial", sans-serif;
   font-size: 36px;
   color: #333; /* Adjust the color as needed */
   margin-left: 20px; /* Add some space between the image and the heading */
 }
+
 .html {
   overflow: hidden;
   width: 100vh;
@@ -408,9 +421,59 @@ export default {
 }
 .container {
   max-width: 100% !important;
-  margin-right: 1% !important;
-  margin-left: 1% !important;
+  padding-right: 2% !important;
+  padding-left: 2% !important;
   margin-top: 20px;
+}
+
+.form-check-input:checked {
+  background-color: #fb8500 !important;
+  border-color: #fb8500 !important;
+}
+
+.btn-primary {
+  background-color: #219EBC !important;
+  border-color: #219EBC !important;
+}
+.btn-primary:hover {
+  background-color: #023047 !important;
+  border-color: #023047 !important;
+}
+.btn-outline-primary {
+  --bs-btn-color: none;
+  border-color: #023047 !important;
+}
+.btn-outline-primary:hover {
+  color: #023047 !important;
+  background-color: none !important;
+}
+
+.vuecal__title-bar {
+  background-color: #fb8500 !important;
+}
+.vuecal__menu {
+  background-color: #023047 !important;
+}
+.vuecal__view-btn:hover {
+  background: #023047 !important;
+}
+.vuecal__view-btn--active {
+  background: #023047 !important;
+}
+
+.vuecal__flex .vuecal__heading {
+  border-left-style: solid;
+  border-right-style: solid;
+}
+
+.vuecal__event {
+  background-color: #FFB703 !important;
+}
+
+@include media-breakpoint-down(md) {
+  .patient-rack {
+    display: none;
+  }
 }
 
 /* You can easily set a different style for each split of your days. */
@@ -434,4 +497,16 @@ export default {
 /* .vuecal__event.leisure {background-color: rgba(253, 156, 66, 0.9);border: 1px solid rgb(233, 136, 46);color: #fff;} */
 /* .vuecal__event.health {background-color: rgba(164, 230, 210, 0.9);border: 1px solid rgb(144, 210, 190);} */
 /* .vuecal__event.sport {background-color: rgba(255, 102, 102, 0.9);border: 1px solid rgb(235, 82, 82);color: #fff;} */
+
+/* Green-theme. */
+.vuecal__menu, .vuecal__cell-events-count {background-color: #42b983;}
+.vuecal__title-bar {background-color: #e4f5ef;}
+.vuecal__cell--today, .vuecal__cell--current {background-color: rgba(240, 240, 255, 0.4);}
+.vuecal:not(.vuecal--day-view) .vuecal__cell--selected {background-color: rgba(235, 255, 245, 0.4);}
+.vuecal__cell--selected:before {border-color: rgba(66, 185, 131, 0.5);}
+/* Cells and buttons get highlighted when an event is dragged over it. */
+.vuecal__cell--highlighted:not(.vuecal__cell--has-splits),
+.vuecal__cell-split--highlighted {background-color: rgba(195, 255, 225, 0.5);}
+.vuecal__arrow.vuecal__arrow--highlighted,
+.vuecal__view-btn.vuecal__view-btn--highlighted {background-color: rgba(136, 236, 191, 0.25);}
 </style>
