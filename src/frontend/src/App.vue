@@ -9,7 +9,7 @@ import "bootstrap/dist/js/bootstrap.bundle.min.js";
 export default {
   data: () => ({
     stickySplitLabelsEnabled: true,
-    minCellWidth: 400,
+    minCellWidth: 0,
     minSplitWidth: 0,
     splitDays: [
       // The id property is added automatically if none (starting from 1), but you can set a custom one.
@@ -102,7 +102,6 @@ export default {
 /* specialHours: { */
 /*   1: overTime */
 /* }; */
-
 </script>
 
 <template>
@@ -388,7 +387,13 @@ export default {
           :snap-to-time="15"
           :special-hours="specialHours"
           :events="events"
-          :editable-events="{ title: false, drag: true, resize: false, delete: true, create: false }"
+          :editable-events="{
+            title: false,
+            drag: true,
+            resize: false,
+            delete: true,
+            create: false,
+          }"
           @event-drop="onEventDrop"
           :split-days="splitDays"
           @ready="scrollToCurrentTime"
@@ -432,8 +437,8 @@ export default {
 }
 
 .btn-primary {
-  background-color: #219EBC !important;
-  border-color: #219EBC !important;
+  background-color: #219ebc !important;
+  border-color: #219ebc !important;
 }
 .btn-primary:hover {
   background-color: #023047 !important;
@@ -467,7 +472,7 @@ export default {
 }
 
 .vuecal__event {
-  background-color: #FFB703 !important;
+  background-color: #ffb703 !important;
 }
 
 @include media-breakpoint-down(md) {
@@ -499,14 +504,30 @@ export default {
 /* .vuecal__event.sport {background-color: rgba(255, 102, 102, 0.9);border: 1px solid rgb(235, 82, 82);color: #fff;} */
 
 /* Green-theme. */
-.vuecal__menu, .vuecal__cell-events-count {background-color: #42b983;}
-.vuecal__title-bar {background-color: #e4f5ef;}
-.vuecal__cell--today, .vuecal__cell--current {background-color: rgba(240, 240, 255, 0.4);}
-.vuecal:not(.vuecal--day-view) .vuecal__cell--selected {background-color: rgba(235, 255, 245, 0.4);}
-.vuecal__cell--selected:before {border-color: rgba(66, 185, 131, 0.5);}
+.vuecal__menu,
+.vuecal__cell-events-count {
+  background-color: #42b983;
+}
+.vuecal__title-bar {
+  background-color: #e4f5ef;
+}
+.vuecal__cell--today,
+.vuecal__cell--current {
+  background-color: rgba(240, 240, 255, 0.4);
+}
+.vuecal:not(.vuecal--day-view) .vuecal__cell--selected {
+  background-color: rgba(235, 255, 245, 0.4);
+}
+.vuecal__cell--selected:before {
+  border-color: rgba(66, 185, 131, 0.5);
+}
 /* Cells and buttons get highlighted when an event is dragged over it. */
 .vuecal__cell--highlighted:not(.vuecal__cell--has-splits),
-.vuecal__cell-split--highlighted {background-color: rgba(195, 255, 225, 0.5);}
+.vuecal__cell-split--highlighted {
+  background-color: rgba(195, 255, 225, 0.5);
+}
 .vuecal__arrow.vuecal__arrow--highlighted,
-.vuecal__view-btn.vuecal__view-btn--highlighted {background-color: rgba(136, 236, 191, 0.25);}
+.vuecal__view-btn.vuecal__view-btn--highlighted {
+  background-color: rgba(136, 236, 191, 0.25);
+}
 </style>
