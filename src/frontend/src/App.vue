@@ -5,26 +5,66 @@ import 'vue-cal/dist/vuecal.css'
 </script>
 
 <script>
+
 export default {
   data: () => ({
+
+    minCellWidth: 400,
+    minSplitWidth: 0,
+    splitDays: [
+      // The id property is added automatically if none (starting from 1), but you can set a custom one.
+      // If you need to toggle the splits, you must set the id explicitly.
+      { id: 1, class: 'tb1', label: 'TB1', hide: false },
+      { id: 2, class: 'tb2', label: 'TB2', hide: false },
+      { id: 3, class: 'vb1', label: 'VB1', hide: false },
+      { id: 4, class: 'vb2', label: 'VB2', hide: false },
+      { id: 5, class: 'u'  , label: 'U'  , hide: false }
+    ],
+    events: [
+      {
+        start: '2018-11-19 10:35',
+        end: '2018-11-19 11:30',
+        title: 'Doctor appointment',
+        content: '<i class="icon material-icons">local_hospital</i>',
+        class: 'health',
+        split: 1 // Has to match the id of the split you have set (or integers if none).
+      },
+      {
+        start: '2018-11-19 18:30',
+        end: '2018-11-19 19:15',
+        title: 'Dentist appointment',
+        content: '<i class="icon material-icons">local_hospital</i>',
+        class: 'health',
+        split: 2
+      },
+      {
+        start: '2018-11-20 18:30',
+        end: '2018-11-20 20:30',
+        title: 'Crossfit',
+        content: '<i class="icon material-icons">fitness_center</i>',
+        class: 'sport',
+        split: 1
+      }
+    ],
+
     draggables: [
       {
         // The id (or however you name it), will help you find which event to delete
         // from the callback triggered on drop into Vue Cal.
         id: 1,
-        title: 'Ext. Event 1',
+        title: 'Patient 1',
         content: 'content 1',
         duration: 60
       },
       {
         id: 2,
-        title: 'Ext. Event 2',
+        title: 'Patient 2',
         content: 'content 2',
         duration: 30
       },
       {
         id: 3,
-        title: 'Ext. Event 3',
+        title: 'Patient 3',
         content: 'content 3'
         // No defined duration here: will default to 2 hours.
       }
@@ -51,46 +91,6 @@ export default {
     }
   }
 }
-
-data: () => ({
-  minCellWidth: 400,
-  minSplitWidth: 0,
-  splitDays: [
-    // The id property is added automatically if none (starting from 1), but you can set a custom one.
-    // If you need to toggle the splits, you must set the id explicitly.
-    { id: 1, class: 'tb1', label: 'TB1', hide: false },
-    { id: 2, class: 'tb2', label: 'TB2', hide: false },
-    { id: 3, class: 'vb1', label: 'VB1', hide: false },
-    { id: 4, class: 'vb2', label: 'VB2', hide: false },
-    { id: 5, class: 'u'  , label: 'U'  , hide: false }
-  ],
-  events: [
-    {
-      start: '2018-11-19 10:35',
-      end: '2018-11-19 11:30',
-      title: 'Doctor appointment',
-      content: '<i class="icon material-icons">local_hospital</i>',
-      class: 'health',
-      split: 1 // Has to match the id of the split you have set (or integers if none).
-    },
-    {
-      start: '2018-11-19 18:30',
-      end: '2018-11-19 19:15',
-      title: 'Dentist appointment',
-      content: '<i class="icon material-icons">local_hospital</i>',
-      class: 'health',
-      split: 2
-    },
-    {
-      start: '2018-11-20 18:30',
-      end: '2018-11-20 20:30',
-      title: 'Crossfit',
-      content: '<i class="icon material-icons">fitness_center</i>',
-      class: 'sport',
-      split: 1
-    }
-  ]
-})
 
 </script>
 
@@ -168,7 +168,6 @@ data: () => ({
 
         <vue-cal
           style="padding: 2.5vh; height: 98vh;"
-          hide-view-selector
           hide-weekends
           :disable-views="['years', 'year', 'month', 'day']"
           :time-from="8 * 60"
@@ -206,11 +205,11 @@ data: () => ({
   }
 
   /* You can easily set a different style for each split of your days. */
-  .vuecal__cell-split.tb1 {background-color: rgba(221, 238, 255, 0.5);}
-  .vuecal__cell-split.tb2 {background-color: rgba(255, 232, 251, 0.5);}
-  .vuecal__cell-split.vb1 {background-color: rgba(221, 255, 239, 0.5);}
-  .vuecal__cell-split.vb2 {background-color: rgba(255, 250, 196, 0.5);}
-  .vuecal__cell-split.u   {background-color: rgba(255, 206, 178, 0.5);}
+  .vuecal__cell-split.tb1 {background-color: red !important;}
+  .vuecal__cell-split.tb2 {background-color: green !important;}
+  .vuecal__cell-split.vb1 {background-color: blue !important;}
+  .vuecal__cell-split.vb2 {background-color: orange !important;}
+  .vuecal__cell-split.u   {background-color: pink !important;}
 
   /* Different color for different event types. */
   /* .vuecal__event.leisure {background-color: rgba(253, 156, 66, 0.9);border: 1px solid rgb(233, 136, 46);color: #fff;} */
