@@ -22,26 +22,26 @@ export default {
     ],
     events: [
       {
-        start: "2018-11-19 10:35",
-        end: "2018-11-19 11:30",
-        title: "Doctor appointment",
-        content: '<i class="icon material-icons">local_hospital</i>',
+        start: "2023-11-17 10:35",
+        end: "2023-11-17 11:00",
+        title: "Andesx Bufeq",
+        content: '<i class="icon material-icons">Lung</i>',
         class: "health",
         split: 1, // Has to match the id of the split you have set (or integers if none).
       },
       {
-        start: "2018-11-19 18:30",
-        end: "2018-11-19 19:15",
-        title: "Dentist appointment",
-        content: '<i class="icon material-icons">local_hospital</i>',
+        start: "2023-11-23 8:30",
+        end: "2023-11-23 9:00",
+        title: "Fedxdfg Ewdsfv",
+        content: '<i class="icon material-icons">Whole Brain</i>',
         class: "health",
         split: 2,
       },
       {
-        start: "2018-11-20 18:30",
-        end: "2018-11-20 20:30",
-        title: "Crossfit",
-        content: '<i class="icon material-icons">fitness_center</i>',
+        start: "2023-11-20 18:30",
+        end: "2023-11-20 18:45",
+        title: "Hefrf Wfrevt",
+        content: '<i class="icon material-icons">Breast</i>',
         class: "sport",
         split: 1,
       },
@@ -118,13 +118,13 @@ export default {
             alt="Team icon"
             src="./assets/icon.jpg"
             class="img-fluid"
-            style="max-width: 100px; max-height: 100px"
+            style="max-width: 60px; max-height: 60px"
           />
         </div>
         <div
           style="display: flex; align-items: center; justify-content: center"
         >
-          <h2>A near-smart scheduler</h2>
+          <h5>A near-smart scheduler</h5>
         </div>
       </div>
     </div>
@@ -156,7 +156,7 @@ export default {
               <div class="modal-content">
                 <div class="modal-header">
                   <h5 class="modal-title" id="exampleModalLabel">
-                    New message
+                    Patient Info
                   </h5>
                   <button
                     type="button"
@@ -375,7 +375,7 @@ export default {
         </div>
 
         <vue-cal
-          style="padding: 2.5vh; height: 98vh"
+          style="padding: 0vh; height: 150vh"
           hide-weekends
           :disable-views="['years', 'year']"
           :min-cell-width="minCellWidth"
@@ -383,9 +383,8 @@ export default {
           :sticky-split-labels="stickySplitLabelsEnabled"
           :time-from="8 * 60"
           :time-to="18 * 60"
-          :time-step="30"
+          :time-step="15"
           :snap-to-time="15"
-          :special-hours="specialHours"
           :events="events"
           :editable-events="{
             title: false,
@@ -397,6 +396,7 @@ export default {
           @event-drop="onEventDrop"
           :split-days="splitDays"
           @ready="scrollToCurrentTime"
+          selected-date="2023-11-27"
         >
         </vue-cal>
       </div>
@@ -404,7 +404,7 @@ export default {
   </main>
 </template>
 
-<style scoped>
+<style>
 .row {
   display: flex;
   align-items: center;
@@ -413,7 +413,7 @@ export default {
 
 .col h2 {
   font-family: "Arial", sans-serif;
-  font-size: 36px;
+  font-size: 20px;
   color: #333; /* Adjust the color as needed */
   margin-left: 20px; /* Add some space between the image and the heading */
 }
@@ -454,16 +454,18 @@ export default {
 }
 
 .vuecal__title-bar {
-  background-color: #fb8500 !important;
+  background-color: #ffb703 !important;
+  font-size: 15px;
 }
 .vuecal__menu {
-  background-color: #023047 !important;
+  background-color: #8ecae6 !important;
+  font-size: 12px;
 }
 .vuecal__view-btn:hover {
   background: #023047 !important;
 }
 .vuecal__view-btn--active {
-  background: #023047 !important;
+  background: #219ebc !important;
 }
 
 .vuecal__flex .vuecal__heading {
@@ -483,19 +485,19 @@ export default {
 
 /* You can easily set a different style for each split of your days. */
 .vuecal__cell-split.tb1 {
-  background-color: red !important;
+  background-color: #8ecae62e !important;
 }
 .vuecal__cell-split.tb2 {
-  background-color: green !important;
+  background-color: #219dbc2f !important;
 }
 .vuecal__cell-split.vb1 {
-  background-color: blue !important;
+  background-color: #35835934 !important;
 }
 .vuecal__cell-split.vb2 {
-  background-color: orange !important;
+  background-color: #ffb80321 !important;
 }
 .vuecal__cell-split.u {
-  background-color: pink !important;
+  background-color: #fb860030 !important;
 }
 
 /* Different color for different event types. */
@@ -516,7 +518,7 @@ export default {
   background-color: rgba(240, 240, 255, 0.4);
 }
 .vuecal:not(.vuecal--day-view) .vuecal__cell--selected {
-  background-color: rgba(235, 255, 245, 0.4);
+  background-color: #ebfff566;
 }
 .vuecal__cell--selected:before {
   border-color: rgba(66, 185, 131, 0.5);
@@ -524,10 +526,18 @@ export default {
 /* Cells and buttons get highlighted when an event is dragged over it. */
 .vuecal__cell--highlighted:not(.vuecal__cell--has-splits),
 .vuecal__cell-split--highlighted {
-  background-color: rgba(195, 255, 225, 0.5);
+  background-color: #c3ffe180;
 }
 .vuecal__arrow.vuecal__arrow--highlighted,
 .vuecal__view-btn.vuecal__view-btn--highlighted {
   background-color: rgba(136, 236, 191, 0.25);
+}
+.custom-class {
+  display: none;
+}
+@include media-breakpoint-up(sm) {
+  .custom-class {
+    display: block;
+  }
 }
 </style>
