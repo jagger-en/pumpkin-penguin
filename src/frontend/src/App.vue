@@ -100,26 +100,27 @@ export default {
       const new_start_time = this.formatDateForDatabase(e.event.start)
       const new_end_time = this.formatDateForDatabase(e.event.end)
 
-      fetch(`http://127.0.0.1:8000/api/v1/appointment?id=${e.event.appointment.id}&nested=false`)
-      .then((get_response) => {
-        get_response.json().then((appointment) => {
-          // Update start and end times
-          appointment.start_time = new_start_time
-          appointment.end_time = new_end_time
-          fetch('http://127.0.0.1:8000/api/v1/appointment', {
-            method: 'PUT',
-            headers: {
-              'Content-type': 'application/json'
-            },
-            body: JSON.stringify(appointment)
-          }).then((response) => {
-            response.json().then((data) => {
-              this.fetchEntriesFromDatabase()
+      if (e.event.appointment) {
+        fetch(`http://127.0.0.1:8000/api/v1/appointment?id=${e.event.appointment.id}&nested=false`)
+        .then((get_response) => {
+          get_response.json().then((appointment) => {
+            // Update start and end times
+            appointment.start_time = new_start_time
+            appointment.end_time = new_end_time
+            fetch('http://127.0.0.1:8000/api/v1/appointment', {
+              method: 'PUT',
+              headers: {
+                'Content-type': 'application/json'
+              },
+              body: JSON.stringify(appointment)
+            }).then((response) => {
+              response.json().then((data) => {
+                this.fetchEntriesFromDatabase()
+              })
             })
           })
-
         })
-      })
+      }
     },
     onEventDragStart(e, draggable) {
       // Passing the event's data to Vue Cal through the DataTransfer object.
