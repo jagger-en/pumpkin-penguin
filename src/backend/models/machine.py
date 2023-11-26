@@ -9,3 +9,4 @@ class Machine(db.Model):
     machine_name = sa.Column(sa.String(150), nullable=False)
     machine_and_regions = db.relationship('MachineAndRegion', backref='machine')
     appointments = db.relationship('Appointment', backref='machine')
+    maintenances = db.relationship('Maintenance', backref='machine')

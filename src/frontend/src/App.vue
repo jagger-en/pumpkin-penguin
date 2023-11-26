@@ -57,7 +57,7 @@ export default {
         fetch(`http://127.0.0.1:8000/api/v1/appointment?nested=true`).then((response) => {
             response.json().then((data) => {
                 if (response.ok) {
-                    this.appointmentsFromDatabase = data.map(d => {
+                    const appointmentsFromDatabase = data.map(d => {
                       return {
                           start: new Date(d.start_time),
                           end: new Date(d.end_time),
@@ -68,7 +68,28 @@ export default {
                           split: this.determineSplit(d.machine.id), // Has to match the id of the split you have set (or integers if none).
                         }
                     })
-                    // this.appointmentsFromDatabase = data
+                    fetch(`http://127.0.0.1:8000/api/v1/maintenance?nested=true`).then((response) => {
+                        response.json().then((data) => {
+                            if (response.ok) {
+                                console.log(data)
+                                const maintenancesFromDatabase = data.map(d => {
+                                  return {
+                                      start: new Date(d.start_time),
+                                      end: new Date(d.end_time),
+                                      title: d.machine.machine_name,
+                                      content: `${d.machine.machine_name}`,
+                                      class: "maintenance",
+                                      appointment: d,
+                                      split: this.determineSplit(d.machine.id), // Has to match the id of the split you have set (or integers if none).
+                                    }
+                                })
+
+                                this.appointmentsFromDatabase = [...maintenancesFromDatabase,
+                                                                 ...appointmentsFromDatabase]
+                            }
+                        })
+                    })
+
                 }
             })
         })

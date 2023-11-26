@@ -15,7 +15,7 @@ def generate_fake_appointment_data():
     intervals = create_non_office_intervals(date_start, date_end)
 
 
-    for idx in range(500):
+    for idx in range(100):
         slot_size = timedelta(minutes=random.randint(15, 30))
         slots = get_available_slots(date_start, date_end, intervals, slot_size)
         if slots:
@@ -33,6 +33,6 @@ def generate_fake_appointment_data():
             }
             fake_data.append(fake_record)
 
-    return fake_data
+    return fake_data, intervals
 
 generate_fake_appointment_data()

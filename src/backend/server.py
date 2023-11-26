@@ -50,6 +50,7 @@ def _register_api_resources(app):
     from backend.resources import GenderResource  # pylint: disable=import-error
     from backend.resources import MachineResource  # pylint: disable=import-error
     from backend.resources import MachineAndRegionResource  # pylint: disable=import-error
+    from backend.resources import MaintenanceResource  # pylint: disable=import-error
     from backend.resources import PatientResource  # pylint: disable=import-error
     from backend.resources import PriorityResource  # pylint: disable=import-error
     from backend.resources import RegionResource  # pylint: disable=import-error
@@ -61,6 +62,7 @@ def _register_api_resources(app):
         GenderResource,
         MachineResource,
         MachineAndRegionResource,
+        MaintenanceResource,
         PatientResource,
         PriorityResource,
         RegionResource,
