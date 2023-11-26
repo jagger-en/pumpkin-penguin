@@ -26,9 +26,9 @@ export default {
         // The id (or however you name it), will help you find which event to delete
         // from the callback triggered on drop into Vue Cal.
         id: 1,
-        title: "Planned Maintenance",
+        title: "Patient card to move",
         duration: 60,
-        class: "closed"
+        class: "health"
       },
       {
         id: 2,
@@ -329,7 +329,7 @@ export default {
           @dragstart="onEventDragStart($event, item)"
         >
           <div class="row">
-            <div class="col">
+            <div :class="`col ${item.class}`">
               <strong>{{ item.title }}</strong>
               ({{ item.duration ? `${item.duration} min` : "no duration" }})
               <div>{{ item.content }}</div>
