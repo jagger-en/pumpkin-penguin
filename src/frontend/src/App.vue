@@ -54,7 +54,7 @@ export default {
       }).id
     },
     fetchEntriesFromDatabase() {
-        fetch(`http://127.0.0.1:8000/api/v1/appointment`).then((response) => {
+        fetch(`http://127.0.0.1:8000/api/v1/appointment?nested=true`).then((response) => {
             response.json().then((data) => {
                 if (response.ok) {
                     this.appointmentsFromDatabase = data.map(d => {
@@ -64,6 +64,7 @@ export default {
                           title: d.machine.machine_name,
                           content: `[${d.priority.name}] ${d.patient.first_name} ${d.patient.last_name}`,
                           class: "health",
+                          appointment: d,
                           split: this.determineSplit(d.machine.id), // Has to match the id of the split you have set (or integers if none).
                         }
                     })
@@ -72,8 +73,53 @@ export default {
             })
         })
     },
+    formatDateForDatabase(unformatted) {
+      const date = new Date(unformatted)
+      const year = date.getFullYear()
+      let month = date.getMonth() + 1
+      let day = date.getDate()
+      let hours = date.getHours()
+      let minutes = date.getMinutes()
+      let seconds = date.getSeconds()
+
+      month = this.placeZeroInFrontIfLessThan10(month)
+      day = this.placeZeroInFrontIfLessThan10(day)
+      hours = this.placeZeroInFrontIfLessThan10(hours)
+      minutes = this.placeZeroInFrontIfLessThan10(minutes)
+      seconds = this.placeZeroInFrontIfLessThan10(seconds)
+
+      return `${year}-${month}-${day} ${hours}:${minutes}:${seconds}`
+    },
+    placeZeroInFrontIfLessThan10(value) {
+        if (parseInt(value) < 10 && parseInt(value) >= 0 && String(value).length == 1) {
+            value = '0' + value
+        }
+        return value
+    },
     onEventChange(e) {
-      console.log(`from ${e.event.start} to ${e.event.end}`)
+      const new_start_time = this.formatDateForDatabase(e.event.start)
+      const new_end_time = this.formatDateForDatabase(e.event.end)
+
+      fetch(`http://127.0.0.1:8000/api/v1/appointment?id=${e.event.appointment.id}&nested=false`)
+      .then((get_response) => {
+        get_response.json().then((appointment) => {
+          // Update start and end times
+          appointment.start_time = new_start_time
+          appointment.end_time = new_end_time
+          fetch('http://127.0.0.1:8000/api/v1/appointment', {
+            method: 'PUT',
+            headers: {
+              'Content-type': 'application/json'
+            },
+            body: JSON.stringify(appointment)
+          }).then((response) => {
+            response.json().then((data) => {
+              this.fetchEntriesFromDatabase()
+            })
+          })
+
+        })
+      })
     },
     onEventDragStart(e, draggable) {
       // Passing the event's data to Vue Cal through the DataTransfer object.
@@ -397,7 +443,6 @@ export default {
           }"
           @event-drop="onEventDrop"
           :split-days="splitDays"
-          @ready="scrollToCurrentTime"
           selected-date="2023-11-27"
           @event-change="onEventChange"
         >
