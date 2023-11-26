@@ -2,6 +2,7 @@ from flask_restful import Resource, request
 from backend.utils.query import query_wrapper
 from backend.utils.query import commit_wrapper
 from backend.models.database import db
+from backend.utils.send_email import send_email
 
 class ApiResource(Resource):
 
@@ -29,6 +30,14 @@ class ApiResource(Resource):
         request_json = request.json
         self.MODEL.query.filter_by(id=request_json['id']).update(request_json)
         db.session.commit()
+
+        body = f'''Dear Patient,
+Your time slot has been updated.
+Details: {request_json}
+Sincerely,
+PumpkinPenguinBot'''
+        send_email('Update to time slot', body, target_email='japman2400@gmail.com')
+
         return request_json, 201
 
 
