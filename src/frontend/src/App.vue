@@ -466,7 +466,6 @@ export default {
         </div>
 
         <vue-cal
-          hide-weekends
           :disable-views="['years', 'year']"
           :min-cell-width="minCellWidth"
           :min-split-width="minSplitWidth"

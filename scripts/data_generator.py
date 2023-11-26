@@ -15,7 +15,7 @@ def generate_fake_appointment_data():
     intervals_info = {}
     for machine_id in ['TB1', 'TB2', 'VB1', 'VB2', 'U1']:
         intervals = create_non_office_intervals(date_start, date_end)
-        for idx in range(20):
+        for idx in range(140):
             slot_size = timedelta(minutes=random.randint(15, 30))
             slots = get_available_slots(date_start, date_end, intervals, slot_size)
             if slots:

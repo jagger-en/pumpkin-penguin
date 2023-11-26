@@ -5,8 +5,26 @@ import datetime
 def create_non_office_intervals(start_time, end_time):
     intervals = []
     for date_time in create_days_list(start_time, end_time, datetime.timedelta(days=1)):
+        if is_friday(date_time):
+            intervals.append(create_weekend_interval(date_time))
         intervals.append(create_non_office_interval(date_time))
     return intervals
+
+def is_friday(date_time):
+    return date_time.weekday() == 4
+
+
+def create_weekend_interval(given_date_time):
+    year = given_date_time.year
+    month = given_date_time.month
+    day = given_date_time.day
+
+    monday = datetime.datetime(year, month, day) + datetime.timedelta(days=3)
+    monday = monday.replace(hour=7, minute=0)
+    today = datetime.datetime(
+        year, month, day)
+    today = today.replace(hour=16, minute=0)
+    return (today, monday)
 
 
 def create_non_office_interval(given_date_time):
