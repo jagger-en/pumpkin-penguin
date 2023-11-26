@@ -78,7 +78,7 @@ export default {
                                       title: d.machine.machine_name,
                                       content: `${d.machine.machine_name}`,
                                       class: "closed",
-                                      appointment: d,
+                                      maintenance: d,
                                       split: this.determineSplit(d.machine.id), // Has to match the id of the split you have set (or integers if none).
                                     }
                                 })
@@ -133,6 +133,28 @@ export default {
                 'Content-type': 'application/json'
               },
               body: JSON.stringify(appointment)
+            }).then((response) => {
+              response.json().then((data) => {
+                this.fetchEntriesFromDatabase()
+              })
+            })
+          })
+        })
+      }
+
+      if (e.event.maintenance) {
+        fetch(`http://127.0.0.1:8000/api/v1/maintenance?id=${e.event.maintenance.id}&nested=false`)
+        .then((get_response) => {
+          get_response.json().then((maintenance) => {
+            // Update start and end times
+            maintenance.start_time = new_start_time
+            maintenance.end_time = new_end_time
+            fetch('http://127.0.0.1:8000/api/v1/maintenance', {
+              method: 'PUT',
+              headers: {
+                'Content-type': 'application/json'
+              },
+              body: JSON.stringify(maintenance)
             }).then((response) => {
               response.json().then((data) => {
                 this.fetchEntriesFromDatabase()

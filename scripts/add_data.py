@@ -966,7 +966,7 @@ add_patients_to_db(cleaned_patients)
 
 from data_generator import generate_fake_appointment_data
 
-appointments, intervals = generate_fake_appointment_data()
+appointments, intervals_info = generate_fake_appointment_data()
 
 for appointment in appointments:
     payload = json.dumps(appointment, ensure_ascii=False)
@@ -984,21 +984,26 @@ maintenances = []
 from datetime import datetime, timedelta
 from scheduler import get_available_slots
 date_start = datetime(2023, 11, 27)
-date_end = datetime(2023, 11, 28)
+date_end = datetime(2023, 12, 10)
 
-maintenance_slots = get_available_slots(start_time=date_start,
+maintenance_slots_for_TB1 = get_available_slots(start_time=date_start,
                                          end_time=date_end,
-                                         intervals=intervals,
-                                         slot_size=timedelta(minutes=60))
+                                         intervals=intervals_info['TB1'],
+                                         slot_size=timedelta(minutes=180))
+
+maintenance_slots_for_TB2 = get_available_slots(start_time=date_start,
+                                         end_time=date_end,
+                                         intervals=intervals_info['TB2'],
+                                         slot_size=timedelta(minutes=180))
 
 maintenances.append({'id': 1, 'comments': 'Replacing components.',
                      'machine_id': 'TB1',
-                     'start_time': maintenance_slots[0][0].strftime('%Y-%m-%d %H:%M:%S'),
-                     'end_time': maintenance_slots[0][1].strftime('%Y-%m-%d %H:%M:%S')})
+                     'start_time': maintenance_slots_for_TB1[0][0].strftime('%Y-%m-%d %H:%M:%S'),
+                     'end_time': maintenance_slots_for_TB1[0][1].strftime('%Y-%m-%d %H:%M:%S')})
 maintenances.append({'id': 2, 'comments': 'Running tests.',
                      'machine_id': 'TB2',
-                     'start_time': maintenance_slots[1][0].strftime('%Y-%m-%d %H:%M:%S'),
-                     'end_time': maintenance_slots[1][1].strftime('%Y-%m-%d %H:%M:%S')})
+                     'start_time': maintenance_slots_for_TB2[1][0].strftime('%Y-%m-%d %H:%M:%S'),
+                     'end_time': maintenance_slots_for_TB2[1][1].strftime('%Y-%m-%d %H:%M:%S')})
 
 for maintenance in maintenances:
     payload = json.dumps(maintenance, ensure_ascii=False)
