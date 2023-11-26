@@ -124,7 +124,7 @@ export default {
         <div
           style="display: flex; align-items: center; justify-content: center"
         >
-          <h2>A near-smart scheduler</h2>
+          <h4>A near-smart scheduler</h4>
         </div>
       </div>
     </div>
@@ -134,7 +134,31 @@ export default {
       <div class="patient-rack col d-none d-lg-block">
         <!-- WIP: add patient -->
         <br />
-        <br />
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="flexCheckChecked"
+            @click="minCellWidth = minCellWidth ? 0 : 400"
+          />
+          <label class="form-check-label" for="flexCheckChecked">
+            Expand day column
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            value=""
+            id="flexCheckChecked"
+            @click="minSplitWidth = minSplitWidth ? 0 : 200"
+          />
+          <label class="form-check-label" for="flexCheckChecked">
+            Expand machine column
+          </label>
+        </div>
+        <br /><br />
         <div>
           <button
             type="button"
@@ -277,32 +301,6 @@ export default {
       </div>
 
       <div class="calendar col-10">
-        <!-- The main schedule view -->
-        <div class="form-check form-check-inline d-none d-lg-block">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="flexCheckChecked"
-            @click="minCellWidth = minCellWidth ? 0 : 400"
-          />
-          <label class="form-check-label" for="flexCheckChecked">
-            Expand day column
-          </label>
-        </div>
-
-        <div class="form-check form-check-inline d-none d-lg-block">
-          <input
-            class="form-check-input"
-            type="checkbox"
-            value=""
-            id="flexCheckChecked"
-            @click="minSplitWidth = minSplitWidth ? 0 : 200"
-          />
-          <label class="form-check-label" for="flexCheckChecked">
-            Expand machine column
-          </label>
-        </div>
         <!-- For loop for splitDays[i] -->
         <div class="form-check form-check-inline">
           <input
@@ -458,9 +456,11 @@ export default {
 
 .vuecal__title-bar {
   background-color: #ffb703 !important;
+  font-size: 15px;
 }
 .vuecal__menu {
   background-color: #8ecae6 !important;
+  font-size: 12px;
 }
 .vuecal__view-btn:hover {
   background: #023047 !important;
@@ -491,7 +491,7 @@ export default {
   background-color: #ffb80321 !important;
 }
 .vuecal__cell-split.u {
-  background-color: #fb860030 !important;
+  background-color: #f2aa1a30 !important;
 }
 
 /* Different color for different event types. */
@@ -501,7 +501,7 @@ export default {
 
 @media (max-width: 991.98px) {
   .main {
-    margin: 0 !important;
+    margin: 2% !important;
   }
   .calendar {
     padding: 0.5rem;
@@ -513,5 +513,4 @@ export default {
 .vuecal__cell-events-count {
   background-color: #42b983;
 }
-
 </style>
