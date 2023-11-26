@@ -124,14 +124,14 @@ export default {
         <div
           style="display: flex; align-items: center; justify-content: center"
         >
-          <h5>A near-smart scheduler</h5>
+          <h2>A near-smart scheduler</h2>
         </div>
       </div>
     </div>
     <br />
 
     <div class="row align-items-start">
-      <div class="patient-rack col">
+      <div class="patient-rack col d-none d-lg-block">
         <!-- WIP: add patient -->
         <br />
         <br />
@@ -278,7 +278,7 @@ export default {
 
       <div class="calendar col-10">
         <!-- The main schedule view -->
-        <div class="form-check form-check-inline">
+        <div class="form-check form-check-inline d-none d-lg-block">
           <input
             class="form-check-input"
             type="checkbox"
@@ -291,7 +291,7 @@ export default {
           </label>
         </div>
 
-        <div class="form-check form-check-inline">
+        <div class="form-check form-check-inline d-none d-lg-block">
           <input
             class="form-check-input"
             type="checkbox"
@@ -375,7 +375,6 @@ export default {
         </div>
 
         <vue-cal
-          style="padding: 0vh; height: 150vh"
           hide-weekends
           :disable-views="['years', 'year']"
           :min-cell-width="minCellWidth"
@@ -413,9 +412,7 @@ export default {
 
 .col h2 {
   font-family: "Arial", sans-serif;
-  font-size: 20px;
   color: #333; /* Adjust the color as needed */
-  margin-left: 20px; /* Add some space between the image and the heading */
 }
 
 .html {
@@ -426,9 +423,7 @@ export default {
 }
 .container {
   max-width: 100% !important;
-  padding-right: 2% !important;
-  padding-left: 2% !important;
-  margin-top: 20px;
+  padding: 2% !important;
 }
 
 .form-check-input:checked {
@@ -453,13 +448,19 @@ export default {
   background-color: none !important;
 }
 
+.calendar {
+  height: 100vh !important;
+}
+.vue-cal {
+  padding: 1rem;
+  height: 80vh;
+}
+
 .vuecal__title-bar {
   background-color: #ffb703 !important;
-  font-size: 15px;
 }
 .vuecal__menu {
   background-color: #8ecae6 !important;
-  font-size: 12px;
 }
 .vuecal__view-btn:hover {
   background: #023047 !important;
@@ -469,18 +470,11 @@ export default {
 }
 
 .vuecal__flex .vuecal__heading {
-  border-left-style: solid;
-  border-right-style: solid;
+  border-left-style: dotted;
 }
 
 .vuecal__event {
   background-color: #ffb703 !important;
-}
-
-@include media-breakpoint-down(md) {
-  .patient-rack {
-    display: none;
-  }
 }
 
 /* You can easily set a different style for each split of your days. */
@@ -505,39 +499,19 @@ export default {
 /* .vuecal__event.health {background-color: rgba(164, 230, 210, 0.9);border: 1px solid rgb(144, 210, 190);} */
 /* .vuecal__event.sport {background-color: rgba(255, 102, 102, 0.9);border: 1px solid rgb(235, 82, 82);color: #fff;} */
 
-/* Green-theme. */
+@media (max-width: 991.98px) {
+  .main {
+    margin: 0 !important;
+  }
+  .calendar {
+    padding: 0.5rem;
+    font-size: 13px;
+  }
+}
+
 .vuecal__menu,
 .vuecal__cell-events-count {
   background-color: #42b983;
 }
-.vuecal__title-bar {
-  background-color: #e4f5ef;
-}
-.vuecal__cell--today,
-.vuecal__cell--current {
-  background-color: rgba(240, 240, 255, 0.4);
-}
-.vuecal:not(.vuecal--day-view) .vuecal__cell--selected {
-  background-color: #ebfff566;
-}
-.vuecal__cell--selected:before {
-  border-color: rgba(66, 185, 131, 0.5);
-}
-/* Cells and buttons get highlighted when an event is dragged over it. */
-.vuecal__cell--highlighted:not(.vuecal__cell--has-splits),
-.vuecal__cell-split--highlighted {
-  background-color: #c3ffe180;
-}
-.vuecal__arrow.vuecal__arrow--highlighted,
-.vuecal__view-btn.vuecal__view-btn--highlighted {
-  background-color: rgba(136, 236, 191, 0.25);
-}
-.custom-class {
-  display: none;
-}
-@include media-breakpoint-up(sm) {
-  .custom-class {
-    display: block;
-  }
-}
+
 </style>
