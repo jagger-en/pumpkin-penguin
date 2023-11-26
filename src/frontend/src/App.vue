@@ -22,28 +22,28 @@ export default {
     ],
     events: [
       {
-        start: "2023-11-17 10:35",
-        end: "2023-11-17 11:00",
-        title: "Andesx Bufeq",
+        start: "2023-11-27 10:35",
+        end: "2023-11-27 11:00",
+        title: "Occupied",
         content: '<i class="icon material-icons">Lung</i>',
-        class: "health",
+        class: "occupied",
         split: 1, // Has to match the id of the split you have set (or integers if none).
       },
       {
-        start: "2023-11-23 8:30",
-        end: "2023-11-23 9:00",
-        title: "Fedxdfg Ewdsfv",
+        start: "2023-11-30 8:30",
+        end: "2023-11-30 9:00",
+        title: "Occupied",
         content: '<i class="icon material-icons">Whole Brain</i>',
-        class: "health",
+        class: "occupied",
         split: 2,
       },
       {
-        start: "2023-11-20 18:30",
-        end: "2023-11-20 18:45",
-        title: "Hefrf Wfrevt",
+        start: "2023-12-01 13:30",
+        end: "2023-12-01 13:45",
+        title: "Occupied",
         content: '<i class="icon material-icons">Breast</i>',
-        class: "sport",
-        split: 1,
+        class: "occupied",
+        split: 4,
       },
     ],
 
@@ -52,21 +52,21 @@ export default {
         // The id (or however you name it), will help you find which event to delete
         // from the callback triggered on drop into Vue Cal.
         id: 1,
-        title: "Patient 1",
-        content: "content 1",
+        title: "Planned Maintenance",
         duration: 60,
+        class: "closed"
       },
       {
         id: 2,
-        title: "Patient 2",
-        content: "content 2",
+        title: "Planned Maintenance",
         duration: 30,
+        class: "closed"
       },
       {
         id: 3,
-        title: "Patient 3",
-        content: "content 3",
+        title: "Planned Maintenance",
         // No defined duration here: will default to 2 hours.
+        class: "closed"
       },
     ],
   }),
@@ -373,6 +373,7 @@ export default {
         </div>
 
         <vue-cal
+          :special-hours="specialHours"
           hide-weekends
           :disable-views="['years', 'year']"
           :min-cell-width="minCellWidth"
@@ -513,4 +514,18 @@ export default {
 .vuecal__cell-events-count {
   background-color: #42b983;
 }
+
+.closed {
+  background:
+    #fff7f0
+    repeating-linear-gradient(
+      -45deg,
+      rgba(255, 162, 87, 0.25),
+      rgba(255, 162, 87, 0.25) 5px,
+      rgba(255, 255, 255, 0) 5px,
+      rgba(255, 255, 255, 0) 15px
+    ) !important;
+  color: #f6984c;
+}
+
 </style>
