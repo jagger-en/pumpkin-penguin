@@ -54,13 +54,15 @@ def create_slots_list(start_time, end_time, slot_size):
 
 
 def check_if_slot_is_available(slot, intervals):
-    for st, en in intervals:
-        slot_st, slot_en = slot
+    for a1, a2 in intervals:
+        b1, b2 = slot
 
-        if slot_st >= st and slot_st <= en and slot_en >= en:
+        if b1 >= a1 and b1 <= a2 and b2 >= a2:
             return False
-        elif slot_en >= st and slot_en <= en and slot_st <= st:
+        elif b2 >= a1 and b2 <= a2 and b1 <= a1:
             return False
-        elif slot_st >= st and slot_en <= en:
+        elif b1 >= a1 and b2 <= a2:
+            return False
+        elif b1 <= a1 and b2 >= a2:
             return False
     return True

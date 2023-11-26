@@ -59,8 +59,8 @@ export default {
                 if (response.ok) {
                     this.appointmentsFromDatabase = data.map(d => {
                       return {
-                          start: d.start_time,
-                          end: d.end_time,
+                          start: new Date(d.start_time),
+                          end: new Date(d.end_time),
                           title: d.machine.machine_name,
                           content: `[${d.priority.name}] ${d.patient.first_name} ${d.patient.last_name}`,
                           class: "health",
