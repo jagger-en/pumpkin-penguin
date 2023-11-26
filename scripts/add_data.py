@@ -1002,8 +1002,8 @@ maintenances.append({'id': 1, 'comments': 'Replacing components.',
                      'end_time': maintenance_slots_for_TB1[0][1].strftime('%Y-%m-%d %H:%M:%S')})
 maintenances.append({'id': 2, 'comments': 'Running tests.',
                      'machine_id': 'TB2',
-                     'start_time': maintenance_slots_for_TB2[1][0].strftime('%Y-%m-%d %H:%M:%S'),
-                     'end_time': maintenance_slots_for_TB2[1][1].strftime('%Y-%m-%d %H:%M:%S')})
+                     'start_time': maintenance_slots_for_TB2[0][0].strftime('%Y-%m-%d %H:%M:%S'),
+                     'end_time': maintenance_slots_for_TB2[0][1].strftime('%Y-%m-%d %H:%M:%S')})
 
 for maintenance in maintenances:
     payload = json.dumps(maintenance, ensure_ascii=False)

@@ -19,7 +19,7 @@ def generate_fake_appointment_data():
             slot_size = timedelta(minutes=random.randint(15, 30))
             slots = get_available_slots(date_start, date_end, intervals, slot_size)
             if slots:
-                chosen_slot = random.choice(slots)
+                chosen_slot = slots[0]
                 intervals.append(chosen_slot)
 
                 print(chosen_slot)
